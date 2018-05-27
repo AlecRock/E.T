@@ -1,0 +1,58 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerInteract : MonoBehaviour {
+	public GameObject currentInterObj = null;
+	public InteractionObject currentInterObjScript = null;
+	public Inventory inventory;
+	bool display = false;
+	public string nomeCena;
+
+	void Update () {
+		if (Input.GetButtonDown("Submit") && currentInterObj) {
+			// Checar se o objeto se encontra no inventario
+			if(currentInterObjScript.inventory){
+				inventory.AddItem (currentInterObj);
+			}
+			if (currentInterObjScript.openable) {
+				
+				if (currentInterObjScript.locked) {
+					if (inventory.FindItem (currentInterObjScript.itemNeeded ) && (currentInterObjScript.item2)&& (currentInterObjScript.item3)&& (currentInterObjScript.item4)&& (currentInterObjScript.item5)&& (currentInterObjScript.item6)&& (currentInterObjScript.item7)&& (currentInterObjScript.item8)) {
+						currentInterObjScript.locked = false;
+						display = true;
+						Debug.Log (currentInterObj.name + " Você ligou o telefone!");
+						carregaCena(nomeCena);
+					} else {
+						Debug.Log (currentInterObj.name + " Você precisa do");
+				}
+				
+			} 
+		}
+	}
+}
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.CompareTag ("item")) {
+			Debug.Log (other.name);
+			currentInterObj = other.gameObject;
+			currentInterObjScript = currentInterObj.GetComponent <InteractionObject> ();
+
+		}
+	}
+	void OnTriggerExit2D(Collider2D other){
+		if(other.CompareTag("item")){
+			if (other.gameObject == currentInterObj) {
+				currentInterObj = null;
+			}
+		}
+	}
+
+	public void carregaCena(string nomeCena){
+
+		Application.LoadLevel (nomeCena);
+	}
+
+}
+
