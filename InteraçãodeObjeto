@@ -1,0 +1,24 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class InteractionObject : MonoBehaviour {
+	public bool inventory; // Quando ativado o objeto pode ir para o inventario
+	public bool openable;
+	public bool locked;
+	public GameObject itemNeeded;
+	public GameObject item2;
+	public GameObject item3;
+	public GameObject item4;
+	public GameObject item5;
+	public GameObject item6;
+	public GameObject item7;
+	public GameObject item8;
+
+
+	public void DoInteraction (){
+
+		gameObject.SetActive (false);
+	}
+
+}
