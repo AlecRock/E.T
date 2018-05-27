@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class IA : MonoBehaviour {
+
+	public Transform target;
+	public float chaseRange;
+	public float speed;
+
+
+	// Use this for initialization
+	void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		float distanceToTarget = Vector3.Distance (transform.position, target.position);
+		if (distanceToTarget < chaseRange) {
+			Vector3 targetDir = target.position - transform.position;
+			Vector3 targetDirection = targetDir.normalized;
+			transform.Translate (targetDirection * Time.deltaTime * speed);
+		}
+		
+	}
+}
