@@ -1,0 +1,34 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Inventory : MonoBehaviour {
+	public GameObject [] inventory = new GameObject[10];
+
+	public void AddItem(GameObject item)
+	{
+		bool itemAdded = false;
+		//Procura o primeiro slot no inventario
+		for (int i= 0; i < inventory.Length;i++){
+			if (inventory [i] == null) {
+				inventory [i] = item;
+				Debug.Log (item.name + " foi adicionado");
+				itemAdded = true;
+				item.SendMessage("DoInteraction");
+				break;
+			}
+		}
+		//Invenatario Cheio
+		if(!itemAdded){
+			Debug.Log ("Inventário está cheio - Item não adicionado");
+		}
+	}
+	public bool FindItem (GameObject item){
+		for (int i = 0; i < inventory.Length; i++) {
+			if(inventory[i] == item){
+				return true;
+			}
+		}
+		return false;
+	}
+}
